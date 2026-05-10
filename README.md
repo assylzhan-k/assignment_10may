@@ -1,10 +1,10 @@
 # Assignment 3 – Graph Traversal and Representation System
 
-## A. Project Overview
+## Project Overview
 
 This project implements a **graph data structure** in Java and applies two classic traversal algorithms — **Breadth-First Search (BFS)** and **Depth-First Search (DFS)** — to graphs of varying sizes.
 ---
-## C. Algorithm Descriptions
+## Algorithm Descriptions
 
 ### Breadth-first search (BFS)
 
@@ -29,7 +29,7 @@ This project implements a **graph data structure** in Java and applies two class
 
 ---
 
-## D. Experimental Results
+## Experimental Results
 
 Graphs were built with a chain structure plus skip edges every 3 vertices and a few back edges, giving a realistic sparse graph.
 
@@ -47,7 +47,7 @@ Graphs were built with a chain structure plus skip edges every 3 vertices and a 
 
 ---
 
-## E. Screenshots
+## Screenshots
 
 <img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 20 17" src="https://github.com/user-attachments/assets/3143fbd6-0c59-4ef4-8327-41ea38231c29" />
 
@@ -72,7 +72,7 @@ Graphs were built with a chain structure plus skip edges every 3 vertices and a 
 
 ---
 
-## F. Reflection
+## Reflection
 
 Implementing BFS and DFS made the difference between the two algorithms concrete in a way that reading alone cannot. BFS's queue guarantees that vertices are visited in order of distance from the source — it "fans out" evenly. DFS's stack means it commits to one path until it can go no further, then backtracks. This makes DFS naturally suited for problems that involve exhaustive path exploration (mazes, dependency resolution), while BFS shines when the goal is to find the *shortest* route.
 
