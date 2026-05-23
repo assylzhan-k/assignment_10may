@@ -132,7 +132,21 @@ The main implementation challenge was handling the visited set correctly for gra
 | `Graph.java` | Adjacency list updated to store `List<Edge>`; added weighted `addEdge`; added `dijkstra()` |
 | `Main.java` | Added weighted edges to small graph; added Dijkstra demo section |
 
-
+### Sample output (10-vertex graph, start = 0)
+ 
+```
+Dijkstra shortest paths from vertex 0:
+  -> Vertex 0 : 0
+  -> Vertex 1 : 1
+  -> Vertex 2 : 1
+  -> Vertex 3 : 2
+  -> Vertex 4 : 2
+  -> Vertex 5 : 2
+  -> Vertex 6 : 2
+  -> Vertex 7 : 3
+  -> Vertex 8 : 3
+  -> Vertex 9 : 3
+```
 
 ### Key design decisions
 - The adjacency list was changed from `List<Vertex>` to `List<Edge>` so each connection carries its weight.
