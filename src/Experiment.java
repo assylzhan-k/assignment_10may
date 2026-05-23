@@ -1,4 +1,5 @@
 public class Experiment {
+    private static final int RUNS = 5;
     private long[][] results;
     private int[]    sizes;
     public Experiment() {
@@ -18,30 +19,47 @@ public class Experiment {
     public void runMultipleTests() {
         for (int s = 0; s < sizes.length; s++) {
             int n = sizes[s];
-            System.out.println("\n--- graph with " + n + " vertices ---");
-            Graph g = buildGraph(n);
-            long bfsStart = System.nanoTime();
-            g.bfs(0);
-            long bfsEnd   = System.nanoTime();
-            results[s][0] = bfsEnd - bfsStart;
-            long dfsStart = System.nanoTime();
-            g.dfs(0);
-            long dfsEnd   = System.nanoTime();
-            results[s][1] = dfsEnd - dfsStart;
-            System.out.println("  BFS time: " + results[s][0] + " ns");
-            System.out.println("  DFS time: " + results[s][1] + " ns");
+            System.out.println("\n--- graph with " + n + " vertices (" + RUNS + " runs) ---");
+            long totalBfs = 0;
+            long totalDfs = 0;
+            for (int r = 0; r < RUNS; r++) {
+                Graph g = buildGraph(n);
+                boolean silent = (r > 0);
+                long bfsStart = System.nanoTime();
+                g.bfs(0, silent);
+                long bfsEnd = System.nanoTime();
+                totalBfs += (bfsEnd - bfsStart);
+                long dfsStart = System.nanoTime();
+                g.dfs(0, silent);
+                long dfsEnd = System.nanoTime();
+                totalDfs += (dfsEnd - dfsStart);
+            }
+            results[s][0] = totalBfs / RUNS;
+            results[s][1] = totalDfs / RUNS;
+            System.out.println("  avg BFS time: " + results[s][0] + " ns");
+            System.out.println("  avg DFS time: " + results[s][1] + " ns");
         }}
     public void printResults() {
-        System.out.println("\n===================");
-        System.out.println("  performance comparison table");
-        System.out.println("=====================");
-        System.out.printf("%-15s %-20s %-20s%n", "graph size", "BFS time (ns)", "DFS time (ns)");
-        System.out.println("----------------------------------------");
+        long totalBfs = 0;
+        long totalDfs = 0;
         for (int s = 0; s < sizes.length; s++) {
-            System.out.printf("%-15d %-20d %-20d%n",
+            totalBfs += results[s][0];
+            totalDfs += results[s][1];
+        }
+        long avgBfs = totalBfs / sizes.length;
+        long avgDfs = totalDfs / sizes.length;
+        System.out.println("\n===================");
+        System.out.println("  performance comparison table (avg of " + RUNS + " runs each)");
+        System.out.println("=======================================================");
+        System.out.printf("%-15s %-22s %-22s%n", "graph size", "avg BFS time (ns)", "avg DFS time (ns)");
+        System.out.println("--------------------------");
+        for (int s = 0; s < sizes.length; s++) {
+            System.out.printf("%-15d %-22d %-22d%n",
                     sizes[s], results[s][0], results[s][1]);
         }
-        System.out.println("==============\n");
+        System.out.println("--------------------------");
+        System.out.printf("%-15s %-22d %-22d%n", "OVERALL AVG", avgBfs, avgDfs);
+        System.out.println("=========================\n");
     }
     private Graph buildGraph(int n) {
         Graph g = new Graph();

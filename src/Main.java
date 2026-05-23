@@ -20,6 +20,10 @@ public class Main {
         Experiment smallExp = new Experiment();
         smallExp.runTraversals(small);
         System.out.println("\n===================");
+        System.out.println("  BONUS: Dijkstra's shortest path from vertex 0");
+        System.out.println("=====================\n");
+        small.dijkstra(0);
+        System.out.println("\n===================");
         System.out.println("  PART--2: performance experiments");
         System.out.println("=====================");
         Experiment exp = new Experiment();
