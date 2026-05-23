@@ -22,5 +22,4 @@ public class Edge {
     @Override
     public String toString() {
         return source + " -(" + weight + ")-> " + destination;
-    }
-}
+    }}

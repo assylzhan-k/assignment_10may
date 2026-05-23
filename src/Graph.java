@@ -136,5 +136,4 @@ public class Graph {
             String distStr = (dist[i] == Integer.MAX_VALUE) ? "unreachable" : String.valueOf(dist[i]);
             System.out.println("  -> vertex " + indexToVertex[i].getId() + " : " + distStr);
         }
-        System.out.println();
-    }}
+        System.out.println(); }}

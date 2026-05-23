@@ -76,5 +76,4 @@ public class Experiment {
             g.addEdge(n - 1, 0);
             g.addEdge(n / 2, 1);
         }
-        return g;
-    }}
+        return g;}}
