@@ -1,4 +1,4 @@
-<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 30 37" src="https://github.com/user-attachments/assets/c32ae926-54aa-46dd-874e-8a0c375bb958" /># Assignment 4 – Graph Traversal and Representation System
+# Assignment 4 – Graph Traversal and Representation System
 
 ## --. Project Overview
 
