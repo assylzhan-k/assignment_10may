@@ -1,8 +1,8 @@
-# Assignment 4 – Graph Traversal and Representation System
+# Assignment 4 – Graph traversal and representation system
 
-## --. Project Overview
+## --. Project overview
 
-This project implements a **graph data structure** in Java and applies two traversal algorithms — BFS and DFS — to graphs of varying sizes. As a bonus, i implemented a **Dijkstra's Shortest Path** algorithm.
+This project implements a **graph data structure** in Java and applies two traversal algorithms — BFS and DFS — to graphs of varying sizes. As a bonus, i implemented a **Dijkstra's shortest path** algorithm.
 
 - **Vertex** — a single node with a unique integer id.
 - **Edge** — a directed, weighted connection from one vertex to another.
@@ -12,7 +12,7 @@ This project implements a **graph data structure** in Java and applies two trave
 
 ---
 
-## --. Class Descriptions
+## --. Class descriptions
 
 ### Vertex - represents a node in the graph. Stores a unique id and provides a getter and `toString()`.
 
@@ -39,9 +39,9 @@ Builds graphs of sizes 10, 30, and 100 vertices. Runs both traversals **5 times*
 
 ---
 
-## --. Algorithm Descriptions
+## --. Algorithm descriptions
 
-### Breadth-First Search
+### Breadth-first search
 
 First, mark the start vertex as visited; add it to a queue. While the queue is not empty:
    - dequeue the front vertex and record it.
@@ -51,7 +51,7 @@ First, mark the start vertex as visited; add it to a queue. While the queue is n
 
 ---
 
-### Depth-First Search
+### Depth-first search
 
 First, push the start vertex onto a stack; mark it visited. Then, while the stack is not empty:
    - pop the top vertex and record it.
@@ -61,7 +61,7 @@ First, push the start vertex onto a stack; mark it visited. Then, while the stac
 
 ---
 
-### Dijkstra's Algorithm (Bonus)
+### Dijkstra's algorithm (bonus)
 
 **Step-by-step:**
 1. Set distance to the start vertex = 0; all others = infinity.
@@ -76,16 +76,16 @@ First, push the start vertex onto a stack; mark it visited. Then, while the stac
 
 ---
 
-## --. Experimental Results
+## --. Experimental results
 
 Graphs were built with a chain structure. Each size was tested 5 times and the average execution time is reported. Traversal order is printed only on the first run; runs 2–5 are silent so output stays clean.
 
-| Graph Size (V) | Avg BFS Time (ns) | Avg DFS Time (ns) |
+| Graph size (V) | avg BFS time (ns) | avg DFS time (ns) |
 |:-:|:-:|:-:|
 | 10 | 35000 | 26999 |
 | 30 | 82167 | 72299 |
 | 100 | 200600 | 246833 |
-| **Overall Average** | **105922** | **115377** |
+| **Overall average** | **105922** | **115377** |
 
 ### Observations
 
@@ -116,9 +116,9 @@ Graphs were built with a chain structure. Each size was tested 5 times and the a
 
 ## F. Reflection
 
-Implementing BFS and DFS made the difference between the two algorithms concrete in a way that reading alone cannot. BFS's queue guarantees that vertices are visited in order of distance from the source — it "fans out" evenly. DFS's stack means it commits to one path until it can go no further, then backtracks. This makes DFS naturally suited for problems that involve exhaustive path exploration (mazes, dependency resolution), while BFS shines when the goal is to find the shortest route in an unweighted graph.
+Implementing BFS and DFS made the differences between the algorithms much clearer than reading about them alone. BFS uses a queue, so it visits vertices level by level and is ideal for finding the shortest path in an unweighted graph. DFS uses a stack, exploring one path deeply before backtracking, which makes it useful for tasks like maze solving and dependency traversal.
 
-The main implementation challenge was handling the visited set correctly for graphs with cycles. Without it, both algorithms would loop forever. Implementing Dijkstra's algorithm extended this further by introducing edge weights — the key insight being that BFS treats all edges as equal, while Dijkstra accounts for actual cost. The relaxation step was the most interesting part: repeatedly improving distance estimates until the optimal solution is locked in. Overall, working through these three algorithms from scratch gave a clear picture of how graph structure, traversal strategy, and edge weights each play a distinct role in algorithm design.
+The main challenge was managing the visited set correctly in graphs with cycles, since without it both algorithms could loop indefinitely. Implementing Dijkstra’s algorithm added the concept of edge weights, showing how it differs from BFS by considering actual path costs instead of treating all edges equally. The most interesting part was the relaxation step, where distance estimates are repeatedly improved until the shortest paths are found. Overall, implementing these algorithms helped demonstrate how traversal strategy and edge weights affect graph problem solving.
 
 ---
 
