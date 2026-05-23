@@ -1,4 +1,4 @@
-# Assignment 4 – Graph Traversal and Representation System
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 30 37" src="https://github.com/user-attachments/assets/c32ae926-54aa-46dd-874e-8a0c375bb958" /># Assignment 4 – Graph Traversal and Representation System
 
 ## --. Project Overview
 
@@ -98,9 +98,19 @@ Graphs were built with a chain structure. Each size was tested 5 times and the a
 
 ## --. Screenshots
 
-
-
-
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 28 59" src="https://github.com/user-attachments/assets/af90686c-003c-4aa3-935e-914e21d9e042" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 29 02" src="https://github.com/user-attachments/assets/e1967e8f-0aa3-4a8a-b14a-eba550ddc068" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 29 05" src="https://github.com/user-attachments/assets/a68e7af9-bfc2-46df-b6ae-f0d815ceb64c" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 30 37" src="https://github.com/user-attachments/assets/9dd3bf51-bb23-4108-a061-6eb7e3b32196" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 30 45" src="https://github.com/user-attachments/assets/d18b32b1-ba85-44a9-b9b7-984423da5795" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 30 51" src="https://github.com/user-attachments/assets/9ae67ae7-bd7a-4d44-a9ea-9805e1af7aa5" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 30 56" src="https://github.com/user-attachments/assets/e2ed5436-8597-4f44-9435-762a3196a619" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 31 05" src="https://github.com/user-attachments/assets/730dbf73-2ae3-4d34-b817-e538bfd27935" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 31 21" src="https://github.com/user-attachments/assets/39326a85-f5e8-43b8-a273-f0bb7d5914d4" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 31 25" src="https://github.com/user-attachments/assets/d7905e66-937f-4cb3-9150-862dcd62ba53" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 31 36" src="https://github.com/user-attachments/assets/cb4e5c5e-1338-4e07-adab-d2e5f06b3a8c" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 31 43" src="https://github.com/user-attachments/assets/d5d5d4fd-590e-4d36-bf7b-aafc7ef7c6a9" />
+<img width="1470" height="956" alt="Screenshot 2026-05-23 at 12 31 46" src="https://github.com/user-attachments/assets/c9095290-fd5c-4f60-ab82-69cd8965bc6e" />
 
 ---
 
