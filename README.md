@@ -1,79 +1,130 @@
-# Assignment 3 – Graph Traversal and Representation System
+# Assignment 4 – Graph Traversal and Representation System
 
-## Project Overview
+## --. Project Overview
 
-This project implements a **graph data structure** in Java and applies two classic traversal algorithms — **Breadth-First Search (BFS)** and **Depth-First Search (DFS)** — to graphs of varying sizes.
+This project implements a **graph data structure** in Java and applies two traversal algorithms — BFS and DFS — to graphs of varying sizes. As a bonus, i implemented a **Dijkstra's Shortest Path** algorithm.
+
+- **Vertex** — a single node with a unique integer id.
+- **Edge** — a directed, weighted connection from one vertex to another.
+- **BFS** — explores the graph level by level, visiting all neighbours before going deeper.
+- **DFS** — explores the graph by going as deep as possible along each branch before backtracking.
+- **Dijkstra** — finds the shortest (lowest-cost) path from one vertex to all others.
+
 ---
-## Algorithm Descriptions
 
-### Breadth-first search (BFS)
+## --. Class Descriptions
+
+### Vertex - represents a node in the graph. Stores a unique id and provides a getter and `toString()`.
+
+### Edge - represents a directed, weighted connection. Stores `source`, `destination`, and `weight`. A second constructor defaults weight to 1 so unweighted usage still works.
+
+### Graph - the core data structure. Uses an adjacency list (`Map<Vertex, List<Edge>>`) to store weighted edges. Each vertex maps to a list of edges leaving it — efficient for memory.
+
+| Method | Description |
+|---|---|
+| `addVertex(Vertex v)` | Registers a vertex in the graph |
+| `addEdge(int from, int to, int weight)` | Creates a directed weighted edge |
+| `addEdge(int from, int to)` | Creates a directed edge with default weight 1 |
+| `printGraph()` | Prints the full weighted adjacency list |
+| `bfs(int startId)` | Performs BFS and prints traversal order |
+| `bfs(int startId, boolean silent)` | Performs BFS silently (used during timing runs) |
+| `dfs(int startId)` | Performs DFS and prints traversal order |
+| `dfs(int startId, boolean silent)` | Performs DFS silently (used during timing runs) |
+| `dijkstra(int startId)` | Finds shortest paths from the given vertex |
+
+### Experiment 
+Builds graphs of sizes 10, 30, and 100 vertices. Runs both traversals **5 times** each — printing traversal order only on the first run and running silently for the rest — then averages the timing results and prints a comparison table.
+
+### Main - entry point. Demonstrates the small graph structure, traversal order, and Dijkstra results, then triggers the full performance experiment.
+
+---
+
+## --. Algorithm Descriptions
+
+### Breadth-First Search
+
+First, mark the start vertex as visited; add it to a queue. While the queue is not empty:
+   - dequeue the front vertex and record it.
+   - for each unvisited neighbour, mark it visited and enqueue it.
+
+**Time complexity:** O(V + E) — every vertex and edge is processed exactly once.
+
+---
+
+### Depth-First Search
+
+First, push the start vertex onto a stack; mark it visited. Then, while the stack is not empty:
+   - pop the top vertex and record it.
+   - for each unvisited neighbour, mark it visited and push it.
+
+**Time complexity:** O(V + E) — every vertex and edge is processed exactly once.
+
+---
+
+### Dijkstra's Algorithm (Bonus)
 
 **Step-by-step:**
-1. Mark the start vertex as visited; add it to a **queue**.
-2. While the queue is not empty:
-   - Dequeue the front vertex and record it.
-   - For each unvisited neighbour, mark it visited and enqueue it.
-**Time complexity:** O(V + E) — every vertex and edge is processed once.
+1. Set distance to the start vertex = 0; all others = infinity.
+2. Keep a `visited[]` boolean array, all false initially.
+3. Repeat V times:
+   - Pick the unvisited vertex `u` with the smallest known distance.
+   - Mark `u` as visited (its distance is now finalised).
+   - For every edge `u → neighbour` with weight `w`: if `dist[u] + w < dist[neighbour]`, update `dist[neighbour]` (this is called **relaxation**).
+4. Print the shortest distance from start to every vertex.
+
+**Time complexity:** O(V²) with arrays (our implementation). Can be improved to O((V + E) log V) with a priority queue.
 
 ---
 
-### Depth-First Search (DFS)
+## --. Experimental Results
 
-**Step-by-step:**
-1. Push the start vertex onto a **stack**; mark it visited.
-2. While the stack is not empty:
-   - Pop the top vertex and record it.
-   - For each unvisited neighbour, mark it visited and push it.
+Graphs were built with a chain structure. Each size was tested 5 times and the average execution time is reported. Traversal order is printed only on the first run; runs 2–5 are silent so output stays clean.
 
-**Time complexity:** O(V + E) — every vertex and edge is processed once.
-
----
-
-## Experimental Results
-
-Graphs were built with a chain structure plus skip edges every 3 vertices and a few back edges, giving a realistic sparse graph.
-
-| Graph Size (V) | BFS Time (ns) | DFS Time (ns) |
+| Graph Size (V) | Avg BFS Time (ns) | Avg DFS Time (ns) |
 |:-:|:-:|:-:|
-| 10 | 80917 | 192458 |
-| 30 | 218583 | 178500 |
-| 100 | 604041 | 490334 |
+| 10 | 35000 | 26999 |
+| 30 | 82167 | 72299 |
+| 100 | 200600 | 246833 |
+| **Overall Average** | **105922** | **115377** |
 
 ### Observations
 
-- Both BFS and DFS scale roughly **linearly** with graph size, consistent with O(V + E).
-- DFS is marginally faster in practice because stack operations
-- The gap between BFS and DFS narrows on larger graphs, suggesting the dominant cost is edge traversal rather than the data-structure overhead.
+- Both algorithms scale with graph size, consistent with O(V + E).
+- On the **30-vertex** graph, BFS and DFS are nearly equal, showing the difference is negligible at small-to-medium sizes.
+- On the **100-vertex** graph, DFS becomes noticeably faster. This is because ArrayDeque stack operations have lower overhead than LinkedList queue operations in Java — not an algorithmic difference, both are still O(V + E).
+- Averaging over 5 runs smooths out JVM fluctuations and gives a more reliable comparison than a single measurement.
 
 ---
 
-## Screenshots
+## --. Screenshots
 
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 20 17" src="https://github.com/user-attachments/assets/3143fbd6-0c59-4ef4-8327-41ea38231c29" />
 
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 20 24" src="https://github.com/user-attachments/assets/e1a61912-d84d-4241-be5c-dadd80e8ebd2" />
 
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 20 28" src="https://github.com/user-attachments/assets/78537dbb-c511-4904-b810-71e0489ce424" />
-
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 21 12" src="https://github.com/user-attachments/assets/84b2518c-654d-4429-bf18-268d24707cf3" />
-
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 21 48" src="https://github.com/user-attachments/assets/210dae0f-dfa7-41f3-8274-370dd5e9f128" />
-
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 22 22" src="https://github.com/user-attachments/assets/68445ec2-df42-48c2-b039-4ac180be4aff" />
-
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 22 26" src="https://github.com/user-attachments/assets/69c2624a-ca4b-41e2-8a12-bb96df2966c1" />
-
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 23 21" src="https://github.com/user-attachments/assets/c06f77c9-47b9-492f-8626-efc6fd404342" />
-
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 23 28" src="https://github.com/user-attachments/assets/642944cd-ba76-4081-b709-5459270eef93" />
-
-<img width="1470" height="956" alt="Screenshot 2026-05-10 at 07 23 34" src="https://github.com/user-attachments/assets/f2271873-9381-4442-b8f3-1a7c55689145" />
 
 
 ---
 
-## Reflection
+## F. Reflection
 
-Implementing BFS and DFS made the difference between the two algorithms concrete in a way that reading alone cannot. BFS's queue guarantees that vertices are visited in order of distance from the source — it "fans out" evenly. DFS's stack means it commits to one path until it can go no further, then backtracks. This makes DFS naturally suited for problems that involve exhaustive path exploration (mazes, dependency resolution), while BFS shines when the goal is to find the *shortest* route.
+Implementing BFS and DFS made the difference between the two algorithms concrete in a way that reading alone cannot. BFS's queue guarantees that vertices are visited in order of distance from the source — it "fans out" evenly. DFS's stack means it commits to one path until it can go no further, then backtracks. This makes DFS naturally suited for problems that involve exhaustive path exploration (mazes, dependency resolution), while BFS shines when the goal is to find the shortest route in an unweighted graph.
 
-The main implementation challenge was handling the visited set correctly for graphs with cycles. Without it, both algorithms would loop forever. A secondary challenge was preserving natural neighbour order in DFS when using an iterative stack — pushing neighbours in reverse order was needed to match the intuitive left-to-right traversal one would get from a recursive DFS. Overall, working through these algorithms from scratch solidified my understanding of how graph structure directly influences the order and efficiency of traversal.
+The main implementation challenge was handling the visited set correctly for graphs with cycles. Without it, both algorithms would loop forever. Implementing Dijkstra's algorithm extended this further by introducing edge weights — the key insight being that BFS treats all edges as equal, while Dijkstra accounts for actual cost. The relaxation step was the most interesting part: repeatedly improving distance estimates until the optimal solution is locked in. Overall, working through these three algorithms from scratch gave a clear picture of how graph structure, traversal strategy, and edge weights each play a distinct role in algorithm design.
+
+---
+
+## --. Bonus – Dijkstra's algorithm
+
+### What was modified
+
+| File | Change |
+|---|---|
+| `Edge.java` | Added `weight` field, getter, updated constructor and `toString()` |
+| `Graph.java` | Adjacency list updated to store `List<Edge>`; added weighted `addEdge`; added `dijkstra()` |
+| `Main.java` | Added weighted edges to small graph; added Dijkstra demo section |
+
+
+
+### Key design decisions
+- The adjacency list was changed from `List<Vertex>` to `List<Edge>` so each connection carries its weight.
+- A second `addEdge(from, to)` overload defaults weight to 1, keeping all BFS/DFS code unchanged.
+- Dijkstra uses plain `int[]` arrays for distances and `boolean[]` for visited — no priority queue — as permitted by the bonus requirements.
